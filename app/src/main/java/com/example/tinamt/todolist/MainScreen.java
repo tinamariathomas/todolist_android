@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainScreen extends AppCompatActivity {
     CategoriesDBHelper mDbHelper;
@@ -41,6 +43,15 @@ public class MainScreen extends AppCompatActivity {
             long itemId = cursor.getLong(
                     cursor.getColumnIndexOrThrow(CategoriesContract.CatgoryEntry._ID)
             );
+            String category = cursor.getString(
+                    cursor.getColumnIndexOrThrow(CategoriesContract.CatgoryEntry.COLUMN_NAME_CATEGORY_NAME)
+            );
+            TextView tv = new TextView(this);
+            tv.setText(Long.toString(itemId) + ". " + category);
+
+            LinearLayout ll = (LinearLayout)findViewById(R.id.mainLayout);
+            ll.addView(tv);
+            
             cursor.moveToNext();
         }
 
@@ -70,7 +81,7 @@ public class MainScreen extends AppCompatActivity {
 
     public void addNewCategory(View view) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        String id = "123";
+        long id = 123;
         String category = "xxx";
         ContentValues values = new ContentValues();
         values.put(CategoriesContract.CatgoryEntry.COLUMN_NAME_ENTRY_ID, id);
