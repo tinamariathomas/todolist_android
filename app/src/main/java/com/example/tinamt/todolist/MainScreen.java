@@ -5,9 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,18 +42,18 @@ public class MainScreen extends AppCompatActivity {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            long itemId = cursor.getLong(
+            int itemId = cursor.getInt(
                     cursor.getColumnIndexOrThrow(CategoriesContract.CatgoryEntry._ID)
             );
             String category = cursor.getString(
                     cursor.getColumnIndexOrThrow(CategoriesContract.CatgoryEntry.COLUMN_NAME_CATEGORY_NAME)
             );
             TextView tv = new TextView(this);
-            tv.setText(Long.toString(itemId) + ". " + category);
+            tv.setText(Integer.toString(itemId) + ". " + category);
 
             LinearLayout ll = (LinearLayout)findViewById(R.id.mainLayout);
             ll.addView(tv);
-            
+
             cursor.moveToNext();
         }
 
@@ -81,8 +83,8 @@ public class MainScreen extends AppCompatActivity {
 
     public void addNewCategory(View view) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        long id = 123;
-        String category = "xxx";
+        int id = 0;
+        String category = ((EditText)findViewById(R.id.CategoryText)).getText().toString();
         ContentValues values = new ContentValues();
         values.put(CategoriesContract.CatgoryEntry.COLUMN_NAME_ENTRY_ID, id);
         values.put(CategoriesContract.CatgoryEntry.COLUMN_NAME_CATEGORY_NAME, category);
@@ -92,5 +94,7 @@ public class MainScreen extends AppCompatActivity {
                 CategoriesContract.CatgoryEntry.TABLE_NAME,
                 CategoriesContract.CatgoryEntry.COLUMN_NAME_CATEGORY_NAME,
                 values);
+        LinearLayout ll = (LinearLayout)findViewById (R.id.mainLayout);
+        ll.invalidate();
     }
 }

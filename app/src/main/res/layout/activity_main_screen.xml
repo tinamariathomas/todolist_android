@@ -22,12 +22,13 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/CategoryText"
             android:hint=""/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+"
-            android:onClick="addNewItem"/>
+            android:onClick="addNewCategory"/>
     </LinearLayout>
 </LinearLayout>

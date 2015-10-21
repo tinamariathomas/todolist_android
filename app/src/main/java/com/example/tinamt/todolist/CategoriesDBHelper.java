@@ -14,7 +14,7 @@ public class CategoriesDBHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + CategoriesContract.CatgoryEntry.TABLE_NAME + " (" +
                     CategoriesContract.CatgoryEntry._ID + " INTEGER PRIMARY KEY," +
                     CategoriesContract.CatgoryEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
-                    CategoriesContract.CatgoryEntry.COLUMN_NAME_CATEGORY_NAME + TEXT_TYPE + COMMA_SEP +
+                    CategoriesContract.CatgoryEntry.COLUMN_NAME_CATEGORY_NAME + TEXT_TYPE  +
                     " )";
 
     private static final String SQL_DELETE_ENTRIES =
